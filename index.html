@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Cards on Hover with Fade Effect</title>
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: #333;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            position: relative;
+        }
+
+        .vertical-line {
+            position: absolute;
+            left: 50%;
+            top: 200px; /* Adjusted to start 200 pixels from the top */
+            transform: translateX(-50%);
+            width: 2px;
+            height: 10000px;
+            background-color: #fff;
+            z-index: 1;
+        }
+
+        .circle-button {
+            width: 20px;
+            height: 20px;
+            background: radial-gradient(#53ef7d, #b0e633);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            position: absolute;
+            left: calc(50% - 10px);
+            top: 300px; /* Adjusted top position */
+            transition: opacity 0.5s ease;
+            z-index: 2;
+        }
+
+        .button-text {
+            position: absolute;
+            left: calc(50% + 20px);
+            color: #fff;
+            font-size: 14px;
+            text-transform: uppercase;
+            opacity: 1;
+            transition: opacity 0.5s ease;
+            z-index: 2;
+        }
+
+        .button-text.bold {
+            font-weight: bold;
+        }
+
+        .normal-text {
+            position: absolute;
+            left: 0;
+            color: #fff;
+            font-size: 12px;
+            opacity: 1;
+            transition: opacity 0.5s ease;
+            z-index: 2;
+        }
+
+        .card {
+            width: 250px; /* Increased width for the card */
+            height: 254px;
+            position: absolute;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            z-index: 3;
+            background: rgba(255, 255, 255, .05);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+            backdrop-filter: blur(10px);
+            border-radius: 8px;
+            transform: translate(-100%, -50%);
+            top: 50%;
+            left: 52%; /* Adjusted left position */
+            transition: opacity 0.5s ease;
+        }
+
+        .card-visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translate(0, -50%);
+        }
+
+        .card:hover {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="vertical-line"></div>
+    
+    <button class="circle-button" style="top: 300px;"></button>
+    <div class="card" style="top: 300px;"></div>
+    <div class="button-text bold" style="top: 300px;">Chargée d'ingénierie pédagogique hybride</div>
+    <div class="normal-text" style="top: 316px;">Syndicat CFTC</div>
+    
+    <button class="circle-button" style="top: 500px;"></button>
+    <div class="card" style="top: 500px;"></div>
+    <div class="button-text" style="top: 500px;">Button 3</div>
+    <div class="normal-text" style="top: 516px;">Description 3</div>
+    
+    <button class="circle-button" style="top: 700px;"></button>
+    <div class="card" style="top: 700px;"></div>
+    <div class="button-text" style="top: 700px;">Button 4</div>
+    <div class="normal-text" style="top: 716px;">Description 4</div>
+    
+    <button class="circle-button" style="top: 900px;"></button>
+    <div class="card" style="top: 900px;"></div>
+    <div class="button-text" style="top: 900px;">Button 5</div>
+    <div class="normal-text" style="top: 916px;">Description 5</div>
+    
+    <button class="circle-button" style="top: 1100px;"></button>
+    <div class="card" style="top: 1100px;"></div>
+    <div class="button-text" style="top: 1100px;">Button 6</div>
+    <div class="normal-text" style="top: 1116px;">Description 6</div>
+    
+    <button class="circle-button" style="top: 1300px;"></button>
+    <div class="card" style="top: 1300px;"></div>
+    <div class="button-text" style="top: 1300px;">Button 7</div>
+    <div class="normal-text" style="top: 1316px;">Description 7</div>
+    
+    <button class="circle-button" style="top: 1500px;"></button>
+    <div class="card" style="top: 1500px;"></div>
+    <div class="button-text" style="top: 1500px;">Button 8</div>
+    <div class="normal-text" style="top: 1516px;">Description 8</div>
+    
+    <button class="circle-button" style="top: 1700px;"></button>
+    <div class="card" style="top: 1700px;"></div>
+    <div class="button-text" style="top: 1700px;">Button 9</div>
+    <div class="normal-text" style="top: 1716px;">Description 9</div>
+    
+    <script>
+        const buttons = document.querySelectorAll('.circle-button');
+        const cards = document.querySelectorAll('.card');
+        const normalTexts = document.querySelectorAll('.normal-text');
+
+        buttons.forEach((button, index) => {
+            const card = cards[index];
+            const buttonText = document.querySelectorAll('.button-text')[index];
+            const normalText = normalTexts[index];
+            
+            button.addEventListener('mouseenter', () => {
+                card.classList.add('card-visible');
+                button.style.opacity = '0';
+                buttonText.style.opacity = '0';
+                normalText.style.opacity = '0';
+            });
+
+            button.addEventListener('mouseleave', () => {
+                if (!card.matches(':hover')) {
+                    card.classList.remove('card-visible');
+                    button.style.opacity = '1';
+                    buttonText.style.opacity = '1';
+                    normalText.style.opacity = '1';
+                }
+            });
+
+            card.addEventListener('mouseenter', () => {
+                card.classList.add('card-visible');
+                button.style.opacity = '0';
+                buttonText.style.opacity = '0';
+                normalText.style.opacity = '0';
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.classList.remove('card-visible');
+                button.style.opacity = '1';
+                buttonText.style.opacity = '1';
+                normalText.style.opacity = '1';
+            });
+
+            // Adjusting normal text position based on bold text position
+            const adjustNormalText = () => {
+                const buttonRect = buttonText.getBoundingClientRect();
+                normalText.style.left = buttonRect.left + 'px'; // Align left with bold text
+                normalText.style.top = buttonRect.bottom + 'px'; // Position below bold text
+            };
+
+            adjustNormalText(); // Initial adjustment
+
+            window.addEventListener('resize', adjustNormalText); // Adjust on window resize
+        });
+    </script>
+</body>
+</html>
